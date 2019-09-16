@@ -1,0 +1,16 @@
+type Mutation {
+  createAccount(
+    username: String!
+    email: String!
+    firstName: String
+    lastName: String
+    bio: String
+  ): User! 
+  #User로 return
+}
+
+type Query {
+  something: String!
+} 
+
+#Query 가 없으면 error가 생겨서 fake Query를 만듬
