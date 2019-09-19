@@ -1,5 +1,5 @@
 import {
-    generateSecret
+    generateSecret, sendSecretMail
 } from "../../../utils";
 import {
     prisma
@@ -12,8 +12,10 @@ export default {
                 email
             } = args;
             const loginSecret = generateSecret();
-            console.log(loginSecret)
+           
             try {
+       
+                await sendSecretMail(email, loginSecret)
                 await prisma.updateUser({
                     data: {
                         loginSecret
@@ -24,7 +26,7 @@ export default {
                 });
                 return true;
             } catch (error) {
-                console.log(error);
+
                 return false;
             }
         }

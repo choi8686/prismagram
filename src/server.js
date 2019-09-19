@@ -1,24 +1,23 @@
-import dotenv from "dotenv";
-import path from "path";
-dotenv.config({ path: path.resolve(__dirname, ".env") });
-require("dotenv").config();
-
+import "./env";
 import {
     GraphQLServer
 } from "graphql-yoga";
 import logger from "morgan";
 import schema from "./schema";
-import { sendSecretMail } from "./utils";
+
+import {authenticateJwt} from "./passport";
 
 
 const PORT = process.env.PORT || 4000;
 
 
 const server = new GraphQLServer({
-    schema
+    schema,
+    context: ({ request }) => ({ request })
 });
 
 server.express.use(logger("dev")); //미들웨어 추가
+server.express.use(authenticateJwt);
 
 server.start({
     port: PORT

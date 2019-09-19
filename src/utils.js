@@ -1,12 +1,8 @@
 
-import dotenv from "dotenv";
-import path from "path";
-dotenv.config({ path: path.resolve(__dirname, ".env") });
-require("dotenv").config();
-
 import { adjectives, nouns } from "./words";
 import nodemailer from "nodemailer";
 import sgTransport from "nodemailer-sendgrid-transport";
+import jwt from "jsonwebtoken"
 
 export const generateSecret = () => {
   const randomNumber = Math.floor(Math.random() * adjectives.length);
@@ -20,16 +16,18 @@ const sendMail = email => {
       api_key: process.env.SENDGRID_PASSWORD
     }
   };
-  const client = nodemailer.createTransport(sgTransport(options));
-  return client.sendMail(email);
+  const client = nodemailer.createTransport(sgTransport(options)); //실행한 결과물을 client에 할당
+  return client.sendMail(email); //sendmail은 promise 함수 return
 };
 
-export const sendSecretMail = (adress, secret) => {
+export const sendSecretMail = (adress, secret) => { 
     const email = {
         from: "choi@prismagram.com",
         to: adress,
         subject : "Login Secret for Prismagram",
-        html: `Hello! Your login secret it ${secret}.<br/> Copy paste on the app/website to log in`
+        html: `Hello! Your login secret is <h1>${secret}</h1>.<br/> Copy paste on the app/website to log in`
     };
-    return sendMail(email)
+    return sendMail(email) //sendMail을 return
 }
+
+export const generateToken = id => jwt.sign({ id }, process.env.JWT_SECRET);
