@@ -9,13 +9,13 @@ export default {
     Mutation: {
         requestSecret: async (_, args) => {
             const {
-                email
+                email //email을 args로 받음
             } = args;
-            const loginSecret = generateSecret();
+            const loginSecret = generateSecret(); //secret words 생성 method 호출
            
             try {
        
-                await sendSecretMail(email, loginSecret)
+                await sendSecretMail(email, loginSecret) //secret words를 보낼때 필요한 args들
                 await prisma.updateUser({
                     data: {
                         loginSecret
