@@ -8,7 +8,7 @@ import { Strategy, ExtractJwt } from "passport-jwt";
 import { prisma } from "../generated/prisma-client";
 
 const jwtOptions = {
-    jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(), //Authorization 헤더에서 jwt를 찾는 역할을 함.
+    jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(), //Find JWT in the Authorization header.
     secretOrKey: process.env.JWT_SECRET
 }
 
@@ -31,7 +31,8 @@ const verifyUser = async (payload, done) => {
     }
 }
 
-export const authenticateJwt = (req, res, next) => {
+//Callback from server
+export const authenticateJwt = (req, res, next) => {  // Function that token authentication.
     passport.authenticate("jwt", {sessions: false}, (error, user) => {
      
         if(user){
