@@ -43,5 +43,5 @@ export const authenticateJwt = (req, res, next) => {  // Function that token aut
 
 }
 
-passport.use(new Strategy(jwtOptions, verifyUser))
+passport.use(new Strategy(jwtOptions, verifyUser)) 
 passport.initialize()

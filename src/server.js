@@ -13,10 +13,10 @@ const PORT = process.env.PORT || 4000;
 
 const server = new GraphQLServer({
     schema,
-    context: ({ request }) => ({ request })
+    context: ({ request }) => ({ request }) //Request contains "user" and creates a server containing request.
 });
 
-server.express.use(logger("dev")); //미들웨어 추가
+server.express.use(logger("dev")); //Added middlewares.
 server.express.use(authenticateJwt);
 
 server.start({
