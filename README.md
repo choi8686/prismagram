@@ -7,7 +7,8 @@
  - [x] Search by location
  - [x] Edit my profile
  - [x] Follow / Unfollow User
- - [ ] See user profile
+ - [x] See user profile
+ - [x] See MY profile
  - [ ] See the full photo
  - [ ] Upload a photo
  - [ ] Edit the photo (Delete)
