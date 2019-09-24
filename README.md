@@ -9,7 +9,7 @@
  - [x] Follow / Unfollow User
  - [x] See user profile
  - [x] See MY profile
- - [ ] See the full photo
+ - [x] See the full photo
  - [ ] Upload a photo
  - [ ] Edit the photo (Delete)
  - [ ] See the feed
