@@ -1,3 +1,4 @@
 type Query {
-    searchUser(term: String!): [User!]!
+  searchUser(term: String!): [User!]!
 }
+
