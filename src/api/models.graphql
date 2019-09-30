@@ -1,19 +1,21 @@
 type User {
-  id: ID! 
-  username: String! 
-  email: String! 
-  firstName: String 
+  id: ID!
+  avatar: String
+  username: String!
+  email: String!
+  firstName: String
   lastName: String
   fullName: String
   isFollowing: Boolean!
   isSelf: Boolean!
   bio: String
   following: [User!]!
-  followers: [User!]! 
+  followingCount: Int!
+  followers: [User!]!
+  followersCount: Int!
   posts: [Post!]!
   likes: [Like!]!
   comments: [Comment!]!
-  isLiked: Boolean!
   rooms: [Room!]!
   loginSecret: String!
   createdAt: String
@@ -77,9 +79,3 @@ type Message {
   updatedAt: String
 }
 
-type UserProfile {
-  user: User!
-  posts: [Post!]!
-  createdAt: String
-  updatedAt: String
-}

@@ -1,11 +1,28 @@
+
+
 /*기존 모델에 생성하지 않은 속성이 존재할 때 추가해줘야 하는 경우가 있다. 
 예를 들어, User 모델에서 FirstName과 LastName을 이용해서 FullName을 만들어야 하는 경우다.
 이럴 때 해당 Model에 Computed를 만들어서 필요한 것을 정의한다. */ 
-
 import { prisma } from "../../../generated/prisma-client";
 
 export default {
     User: {
+        posts: ({ id }) => prisma.user({ id }).posts(),
+        following: ({ id }) => prisma.user({ id }).following(),
+        followers: ({ id }) => prisma.user({ id }).followers(),
+        likes: ({ id }) => prisma.user({ id }).likes(),
+        comments: ({ id }) => prisma.user({ id }).comments(),
+        rooms: ({ id }) => prisma.user({ id }).rooms(),
+        followingCount: ({ id }) => 
+        prisma
+        .usersConnection({ where: { followers_some: { id } } })
+        .aggregate()
+        .count(),
+    followersCount: ({ id }) =>
+      prisma
+        .usersConnection({ where: { following_none: { id } } })
+        .aggregate()
+        .count(),
         fullName: parent => {
             return `${parent.firstName} ${parent.lastName}`;
             
@@ -39,3 +56,4 @@ export default {
         }
     }
 };
+
