@@ -25,8 +25,8 @@ export default {
                     }
                 });
                 return true;
-            } catch (error) {
-
+            } catch (e) {
+                console.log(e)
                 return false;
             }
         }

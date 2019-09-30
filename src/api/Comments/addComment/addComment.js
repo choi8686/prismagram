@@ -8,7 +8,7 @@ export default {
             isAuthenticated(request); //for authentication
             const { text, postId } = args; // args that write comments
             const { user } = request; // request includes user information 
-            const comment = prisma.createComment({
+            return prisma.createComment({
                 user: {
                     connect: {
                         id: user.id 
@@ -21,7 +21,7 @@ export default {
                 },
                 text
             });
-            return comment;
+  
         }
     }
 }
